@@ -2,9 +2,9 @@
     "projects": [
         {
             "name": "Fractal Click",
-            "thumbnail_image": "/fractal-click/screenshot.png",
+            "thumbnail_image": "fractal-click/screenshot.png",
             "description": "Just click & see like a clown",
-            "path": "/fractal-click/index.html"
+            "path": "fractal-click/index.html"
         }
     ]
 }
