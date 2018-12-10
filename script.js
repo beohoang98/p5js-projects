@@ -24,7 +24,7 @@ function createProjectCard(project) {
     card.className = 'project';
     card.innerHTML = `
     <div class='project-thumb-image'>
-        <img alt='${project.name}' src='${project.thumbnail_image}'/>
+        <img alt='${project.name}' src='${project.path}screenshot.png'/>
     </div>
     <div class='project-info'>
         <div class='project-name'>${project.name}</div>

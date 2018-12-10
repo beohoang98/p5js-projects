@@ -2,9 +2,13 @@
     "projects": [
         {
             "name": "Fractal Click",
-            "thumbnail_image": "fractal-click/screenshot.png",
-            "description": "Just click & see like a clown",
-            "path": "fractal-click/index.html"
+            "description": "Just click & see the fractals",
+            "path": "fractal-click/"
+        },
+        {
+            "name": "Particles System",
+            "description": "Learn to create a particles system, example as fire effect",
+            "path": "particles-system/"
         }
     ]
 }

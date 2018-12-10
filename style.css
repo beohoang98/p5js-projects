@@ -17,6 +17,7 @@ body {
   flex-flow: row wrap;
   padding: 2em;
   justify-content: center;
+  align-items: flex-start;
 }
 .project {
   width: 300px;
@@ -24,6 +25,7 @@ body {
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 10px 40px #0008;
+  margin: 2em;
 }
 .project-thumb-image img {
   width: 300px;
