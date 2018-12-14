@@ -7,14 +7,20 @@ class Collider {
      */
     static get listCollider() {
         if (!Collider._listCollider) {
-            Collider._listCollider = [];
+            Collider._listCollider = {};
         }
         return Collider._listCollider;
     }
 
-    constructor() {
+    constructor(tag = "") {
+        this.tag = tag;
+        this.uuid = uuidv4();
         this.funcOnCollider = ()=>{};
-        Collider.listCollider.push(this);
+        Collider.listCollider[this.uuid] = this;
+    }
+
+    destroy() {
+        Collider.remove(this.uuid);
     }
 
     /**
@@ -34,45 +40,81 @@ class Collider {
     }
 
     static checkAll() {
-        for (let i = 0; i < Collider.listCollider.length - 1; ++i) {
-            for (let j = i + 1; j < Collider.listCollider.length; ++j) {
-                if (Collider.listCollider[i].check(Collider.listCollider[j])) {
-                    Collider.listCollider[i].funcOnCollider(Collider.listCollider[j]);
-                    Collider.listCollider[j].funcOnCollider(Collider.listCollider[i]);
+        const arrKey = Object.keys(Collider.listCollider);
+        const len = arrKey.length;
+
+        for (let i = 0; i < len - 1; ++i) {
+            for (let j = i + 1; j < len; ++j) {
+                if (Collider.listCollider[arrKey[i]].check(Collider.listCollider[arrKey[j]]) > 0) {
+                    Collider.listCollider[arrKey[i]].funcOnCollider(Collider.listCollider[arrKey[j]]);
+                    Collider.listCollider[arrKey[j]].funcOnCollider(Collider.listCollider[arrKey[i]]);
                 }
             }
         }
+    }
+
+    static remove(uuid) {
+        delete Collider._listCollider[uuid];
     }
 }
 
 class CircleCollider extends Collider {
     constructor(x, y, radius, tag) {
-        super();
+        super(tag);
         this.x = x;
         this.y = y;
         this.radius = radius;
-        this.tag = tag;
     }
 
     /**
      * @override
      * @param {Collider} anotherCollider
-     * @returns `0` if be not collision
-     * @returns `number` length of abstract radius if collision
+     * @return true/false if collision or not
      */ 
     check(anotherCollider) {
-        const distance2 = (this.x - anotherCollider.x) * (this.x - anotherCollider.x)
-                        + (this.y - anotherCollider.y) * (this.y - anotherCollider.y);
-        const minDistance2 = (this.radius + anotherCollider.radius)
-                            * (this.radius + anotherCollider.radius);
+        if (anotherCollider instanceof CircleCollider) {
+            return this.checkWithCircleCollision(anotherCollider);
+        } else if (anotherCollider instanceof LineCollider) {
+            return this.checkWithLineCollider(anotherCollider);
+        }
+
+        return false;
+    }
+
+    checkWithCircleCollision(collider) {
+        const distance2 = (this.x - collider.x) ** 2
+                        + (this.y - collider.y) ** 2;
+        const minDistance2 = (this.radius + collider.radius) ** 2;
         
-        if (distance2 <= minDistance2)
-            return minDistance2 - distance2;
-        return 0;
+        return (distance2 <= minDistance2);
+    }
+
+    checkWithLineCollider(collider) {
+        return false;
     }
 
     update(x,  y) {
         this.x = x;
         this.y = y;
     }
+}
+
+class LineCollider extends Collider {
+    constructor(x1, y1, x2, y2, tag) {
+        super(tag);
+
+        this.x1 = x1; this.y1 = y1;
+        this.x2 = x2; this.y2 = y2;
+    }
+
+    update(x,  y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+
+function uuidv4() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+        (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    )
 }

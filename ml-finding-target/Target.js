@@ -1,7 +1,7 @@
 class Target {
-    static get DEFAULT_SIZE() {10};
+    static get DEFAULT_SIZE() {return 10};
     
-    constructor(x = 0,  y = 0, size = DEFAULT_SIZE) {
+    constructor(x = 0,  y = 0, size = Target.DEFAULT_SIZE) {
         this.x = x;
         this.y = y;
         this.size = size;
@@ -11,7 +11,6 @@ class Target {
     respawn(x = 0, y = 0) {
         this.x = x;
         this.y = y;
-        draw();
     }
 
     draw() {
@@ -26,11 +25,16 @@ class Target {
 }
 
 class Wall {
-    constructor(x, y, size) {
+    constructor(x, y, size = Target.DEFAULT_SIZE) {
         this.x = x;
         this.y = y;
         this.radius = size;
         this.collider = new CircleCollider(x, y, size, "wall");
+    }
+
+    respawn(x = 0, y = 0) {
+        this.x = x;
+        this.y = y;
     }
 
     draw() {
