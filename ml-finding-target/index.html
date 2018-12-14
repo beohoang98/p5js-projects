@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Finding target</title>
+    
+    <script>
+        if (!location.href.endsWith('/')) {
+            location.href = location.href + "/";
+        }
+    </script>
+    <script src="../lib/p5.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #ccc;
+        }
+        canvas {
+            border-radius: 12px;
+            box-shadow: 0px 10px 20px -5px #0008;
+        }
+    </style>
+</head>
+<body>
+    
+    <script src="Collider.js"></script>
+    <script src="ADN.js"></script>
+    <script src="Target.js"></script>
+    <script src="Ball.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
