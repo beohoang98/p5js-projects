@@ -31,7 +31,7 @@ function createProjectCard(project) {
         <div class='project-des'>${project.description}</div>
     </div>
     <div class='project-link'>
-        <a href='${project.path}' target='_blank' rel='noopenner noreferrer'>See project</a>
+        <a href='${project.path}' target='_self' rel='noopenner noreferrer'>See project</a>
     </div>
     `;
 

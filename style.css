@@ -36,6 +36,10 @@ body {
 .project-name {
   font-weight: bold;
   font-size: 1.25em;
+  color: #fff;
+}
+.project-des {
+  color: #ccc;
 }
 .project-link {
   opacity: 0;

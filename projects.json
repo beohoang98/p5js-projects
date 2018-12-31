@@ -9,6 +9,11 @@
             "name": "Particles System",
             "description": "Learn to create a particles system, example as fire effect",
             "path": "particles-system/"
+        },
+        {
+            "name": "Simple A* Algorithmn",
+            "description": "Visual A* Algoritmn steps & choosing way to find the target",
+            "path": "astar-visualization/"
         }
     ]
 }

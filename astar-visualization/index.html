@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>A* algorithmn visualization</title>
+
+    <script>
+        if (!location.href.endsWith('/')) {
+            location.href += '/';
+        }
+        function Back() {
+            history.back();
+        }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fcfcfc;
+            background-image: linear-gradient(0deg, #ccc, #fff);
+        }
+        canvas {
+            border-radius: 5px;
+            box-shadow: 0 16px 32px #0003;
+        }
+        .float {
+            position: fixed;
+            bottom: 1em;
+            left: 1em;
+            width: 300px;
+        }
+        #back {
+            position: fixed;
+            top: 1em;
+            left: 1em;
+            border-radius: 4px;
+            cursor: pointer;
+            background: #fff;
+            padding: 4px;
+        }
+        .shadow {
+            box-shadow: 0 5px 20px #0003;
+        }
+        select, input {
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: none;
+            margin: 4px;
+        }
+        button {
+            border: none;
+            outline: none;
+            background-color: #555;
+            color: #fff;
+            padding: 5px 17px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: 200ms;
+        }
+        button:hover {
+            background-color: #000;
+        }
+    </style>
+
+    <script src="../lib/p5.min.js"></script>
+    <script src="https://unpkg.com/tinyqueue@2.0.0/tinyqueue.min.js"></script>
+    <script src="astar.js"></script>
+    <script src="file_and_map.js"></script>
+</head>
+<body>
+    <div id="back" class="shadow" onclick="Back()">Back</div>
+    <div id="control" style='display: none;'>
+        <button id="start" class="shadow">START</button>
+        <button id="pause" class="shadow">PAUSE</button>
+        <select name="map-select" id="map-select" class="shadow"></select>
+        <div>
+            <label for="weight">Weight:</label>
+            <input type="number" class="shadow" id="weight" min="1" step="0.1" value="1">
+        </div>
+    </div>
+    <div class="float">
+        <b>Libraries used:</b>
+        <ul>
+            <li><a href="https://p5js.org" target="_blank">p5js</a></li>
+            <li><a href="https://github.com/mourner/tinyqueue" target="_blank">tinyqueue</a></li>
+        </ul>
+    </div>
+    <script defer src="main.js"></script>
+</body>
+</html>
